@@ -27,6 +27,8 @@ app.get('/webhook', (req, res) => {
   }
 })
 
+
+
 app.post('/webhook', (req, res) => {
   let bodyMess = req.body
   console.log(JSON.stringify(bodyMess, null, 2))
@@ -43,7 +45,7 @@ app.post('/webhook', (req, res) => {
       let phone_number_id =
         bodyMess.entry[0].changes[0].value.metadata.phone_number_id
 
-      //  Echo to your PHP script
+
       axios.post('https://whasapp.in/store-webhook.php', {
         from: from,
         message: mess
@@ -55,8 +57,8 @@ app.post('/webhook', (req, res) => {
         console.error("PHP webhook echo failed:", error.message)
       })
 
-      //  Reply to user on WhatsApp
-      var data = JSON.stringify({
+ 
+      const data = JSON.stringify({
         messaging_product: 'whatsapp',
         recipient_type: 'individual',
         to: from,
@@ -67,7 +69,7 @@ app.post('/webhook', (req, res) => {
         },
       })
 
-      var config = {
+      const config = {
         method: 'post',
         url: `https://graph.facebook.com/v15.0/${phone_number_id}/messages`,
         headers: {
@@ -87,12 +89,13 @@ app.post('/webhook', (req, res) => {
           res.sendStatus(403)
         })
     } else {
-      res.sendStatus(200) 
+      res.sendStatus(200)
     }
   } else {
     res.sendStatus(403)
   }
 })
+
 
 // app.post('/webhook', (req, res) => {
 //   let bodyMess = req.body
