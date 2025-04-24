@@ -46,10 +46,7 @@ app.post('/webhook', (req, res) => {
         bodyMess.entry[0].changes[0].value.metadata.phone_number_id
 
 
-      axios.post('https://whasapp.in/store-webhook.php', {
-        from: from,
-        message: mess
-      })
+    axios.post('https://whasapp.in/store-webhook.php', bodyMess)
       .then((response) => {
         console.log("PHP response:", response.data)
       })
