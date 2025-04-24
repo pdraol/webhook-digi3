@@ -68,7 +68,7 @@ app.post('/webhook', (req, res) => {
 
       const config = {
         method: 'post',
-        url: `https://graph.facebook.com/v15.0/${phone_number_id}/messages`,
+        url: `https://graph.facebook.com/v18.0/${phone_number_id}/messages`,
         headers: {
           authorization: `Bearer ${API_token}`,
           'Content-Type': 'application/json',
