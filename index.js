@@ -32,6 +32,15 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   let bodyMess = req.body
   console.log(JSON.stringify(bodyMess, null, 2))
+  
+  axios.post('https://whasapp.in/store-webhook.php', bodyMess)
+  .then((response) => {
+    console.log("PHP response:", response.data)
+  })
+  .catch((error) => {
+    console.error("PHP webhook echo failed:", error.message)
+  })
+
 
   if (bodyMess.object) {
     if (
@@ -45,14 +54,6 @@ app.post('/webhook', (req, res) => {
       let phone_number_id =
         bodyMess.entry[0].changes[0].value.metadata.phone_number_id
 
-
-    axios.post('https://whasapp.in/store-webhook.php', bodyMess)
-      .then((response) => {
-        console.log("PHP response:", response.data)
-      })
-      .catch((error) => {
-        console.error("PHP webhook echo failed:", error.message)
-      })
 
  
       const data = JSON.stringify({
