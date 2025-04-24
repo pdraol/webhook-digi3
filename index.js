@@ -30,6 +30,7 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   let bodyMess = req.body
   console.log(JSON.stringify(bodyMess, null, 2))
+
   if (bodyMess.object) {
     if (
       bodyMess.entry &&
@@ -42,6 +43,19 @@ app.post('/webhook', (req, res) => {
       let phone_number_id =
         bodyMess.entry[0].changes[0].value.metadata.phone_number_id
 
+      //  Echo to your PHP script
+      axios.post('https://whasapp.in/store-webhook.php', {
+        from: from,
+        message: mess
+      })
+      .then((response) => {
+        console.log("PHP response:", response.data)
+      })
+      .catch((error) => {
+        console.error("PHP webhook echo failed:", error.message)
+      })
+
+      //  Reply to user on WhatsApp
       var data = JSON.stringify({
         messaging_product: 'whatsapp',
         recipient_type: 'individual',
@@ -52,6 +66,7 @@ app.post('/webhook', (req, res) => {
           body: mess,
         },
       })
+
       var config = {
         method: 'post',
         url: `https://graph.facebook.com/v15.0/${phone_number_id}/messages`,
@@ -61,6 +76,7 @@ app.post('/webhook', (req, res) => {
         },
         data: data,
       }
+
       axios(config)
         .then(function (response) {
           console.log(JSON.stringify(response.data))
@@ -70,9 +86,60 @@ app.post('/webhook', (req, res) => {
           console.log(error)
           res.sendStatus(403)
         })
+    } else {
+      res.sendStatus(200) 
     }
+  } else {
+    res.sendStatus(403)
   }
 })
+
+// app.post('/webhook', (req, res) => {
+//   let bodyMess = req.body
+//   console.log(JSON.stringify(bodyMess, null, 2))
+//   if (bodyMess.object) {
+//     if (
+//       bodyMess.entry &&
+//       bodyMess.entry[0].changes &&
+//       bodyMess.entry[0].changes[0].value.messages &&
+//       bodyMess.entry[0].changes[0].value.messages[0]
+//     ) {
+//       let from = bodyMess.entry[0].changes[0].value.messages[0].from
+//       let mess = bodyMess.entry[0].changes[0].value.messages[0].text.body
+//       let phone_number_id =
+//         bodyMess.entry[0].changes[0].value.metadata.phone_number_id
+
+//       var data = JSON.stringify({
+//         messaging_product: 'whatsapp',
+//         recipient_type: 'individual',
+//         to: from,
+//         type: 'text',
+//         text: {
+//           preview_url: false,
+//           body: mess,
+//         },
+//       })
+//       var config = {
+//         method: 'post',
+//         url: `https://graph.facebook.com/v15.0/${phone_number_id}/messages`,
+//         headers: {
+//           authorization: `Bearer ${API_token}`,
+//           'Content-Type': 'application/json',
+//         },
+//         data: data,
+//       }
+//       axios(config)
+//         .then(function (response) {
+//           console.log(JSON.stringify(response.data))
+//           res.sendStatus(200)
+//         })
+//         .catch(function (error) {
+//           console.log(error)
+//           res.sendStatus(403)
+//         })
+//     }
+//   }
+// })
 
 app.listen(port , ()=>{
     console.log('webhook is listening on srver')
