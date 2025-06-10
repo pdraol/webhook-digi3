@@ -40,7 +40,7 @@ app.post('/webhook', (req, res) => {
   // .catch((error) => {
   //   console.error("PHP webhook echo failed:", error.message)
   // })
- axios.post('https://webhook.s01.in/store-webhook.aspx', bodyMess)
+ axios.post('api.whasapp.in/store-webhook.aspx', bodyMess)
   .then((response) => {
     console.log("PHP response:", response.data)
   })
