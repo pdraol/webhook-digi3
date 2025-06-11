@@ -40,7 +40,7 @@ app.post('/webhook', (req, res) => {
   // .catch((error) => {
   //   console.error("PHP webhook echo failed:", error.message)
   // })
- axios.post('http://apis.whasapp.in/api/WhatsAppAPI.aspx', bodyMess)
+ axios.post('https://apis.whasapp.in/api/WhatsAppAPI.aspx', bodyMess)
   .then((response) => {
     console.log("PHP response:", response.data)
   })
