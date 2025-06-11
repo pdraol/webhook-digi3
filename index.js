@@ -33,20 +33,20 @@ app.post('/webhook', (req, res) => {
   let bodyMess = req.body
   console.log(JSON.stringify(bodyMess, null, 2))
   
-  // axios.post('https://whasapp.in/store-webhook.php', bodyMess)
-  // .then((response) => {
-  //   console.log("PHP response:", response.data)
-  // })
-  // .catch((error) => {
-  //   console.error("PHP webhook echo failed:", error.message)
-  // })
- axios.post('https://apis.whasapp.in/api/WhatsAppAPI.aspx', bodyMess)
+  axios.post('https://whasapp.in/store-webhook.php', bodyMess)
   .then((response) => {
     console.log("PHP response:", response.data)
   })
   .catch((error) => {
     console.error("PHP webhook echo failed:", error.message)
   })
+ // axios.post('https://apis.whasapp.in/api/WhatsAppAPI.aspx', bodyMess)
+ //  .then((response) => {
+ //    console.log("PHP response:", response.data)
+ //  })
+ //  .catch((error) => {
+ //    console.error("PHP webhook echo failed:", error.message)
+ //  })
 
   if (bodyMess.object) {
     if (
