@@ -32,8 +32,7 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   let bodyMess = req.body
   console.log(JSON.stringify(bodyMess, null, 2))
-  
-  axios.post('https://whasapp.in/store-webhook.php', bodyMess)
+  axios.post('https://whasapp.in/store-webhook.php', bodyMess,{ timeout: 100000 })
   .then((response) => {
     console.log("PHP response:", response.data)
   })
