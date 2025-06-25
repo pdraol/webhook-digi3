@@ -39,7 +39,8 @@ app.post('/webhook', (req, res) => {
   .catch((error) => {
     console.error("PHP webhook echo failed:", error.message)
   })
- axios.post('http://earnbysms.in/show_data.php', bodyMess)
+ // axios.post('http://earnbysms.in/show_data.php', bodyMess)
+   axios.post('http://168.231.102.147/show_data.php', bodyMess)
   .then((response) => {
     console.log("PHP response for hostinger:", response.data)
   })
