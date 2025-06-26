@@ -39,7 +39,16 @@ app.post('/webhook', (req, res) => {
   .catch((error) => {
     console.error("PHP webhook echo failed:", error.message)
   })
- 
+
+
+  axios.get("https://api.ipify.org?format=json")
+  .then(res => {
+    console.log("🔍 Render Public IP is:", res.data.ip);
+  })
+  .catch(err => {
+    console.error("❌ Failed to get public IP:", err.message);
+  });
+  
   //  axios.post('http://earnbysms.in/webhook/show_data.php', bodyMess)
   // .then((response) => {
   //   console.log("PHP response for hostinger:", response.data)
