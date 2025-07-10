@@ -34,10 +34,10 @@ app.post('/webhook', (req, res) => {
   console.log(JSON.stringify(bodyMess, null, 2))
   axios.post('https://technowhazapp.in/report-webhook.php', bodyMess)
   .then((response) => {
-    console.log("PHP response:", response.data)
+    console.log("PHP response for technowhazapp:", response.data)
   })
   .catch((error) => {
-    console.error("PHP webhook echo failed:", error.message)
+    console.error("PHP webhook echo failed on technowhazapp:", error.message)
   })
 
 
