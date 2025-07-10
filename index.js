@@ -32,7 +32,7 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   let bodyMess = req.body
   console.log(JSON.stringify(bodyMess, null, 2))
-  axios.post('http://technowhazapp.in/report-webhook.php', bodyMess)
+  axios.post('https://technowhazapp.in/report-webhook.php', bodyMess)
   .then((response) => {
     console.log("PHP response for technowhazapp:", response.data)
   })
