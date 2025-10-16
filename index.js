@@ -1,6 +1,7 @@
 const express = require('express')
 const body_parser = require('body-parser')
 const axios = require('axios')
+const querystring = require('querystring');
 
 const app = express().use(body_parser.json())
 const port = process.env.PORT || 8000
@@ -40,6 +41,15 @@ app.post('/webhook', (req, res) => {
     console.error("PHP webhook echo failed on technowhazapp:", error.message)
   })
 
+  
+      // --- NEW: Forward to show_data.php in URL-encoded format ---
+    axios.post(
+      'https://digiwhatsapp.in/show_dataa.php',
+      querystring.stringify({ data: JSON.stringify(bodyMess) }),
+      { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+    )
+    .then(response => console.log("Extra PHP forward response:", response.data))
+    .catch(error => console.error("Extra PHP forward failed:", error.message));
 
 
    axios.post('https://digiwhatsapp.in/show_data.php', bodyMess)
