@@ -44,7 +44,7 @@ app.post('/webhook', (req, res) => {
   
       // --- NEW: Forward to show_data.php in URL-encoded format ---
     axios.post(
-      'https://digiwhatsapp.in/show_dataa.php',
+      'https://digiwhatsapp.in/public/show_dataa.php',
       querystring.stringify({ data: JSON.stringify(bodyMess) }),
       { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
     )
