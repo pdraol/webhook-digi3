@@ -52,7 +52,8 @@ app.post('/webhook', (req, res) => {
     .catch(error => console.error("Extra PHP forward failed:", error.message));
 
 
-   axios.post('https://digiwhatsapp.in/show_data.php', bodyMess)
+  // axios.post('https://digiwhatsapp.in/show_data.php', bodyMess)
+  axios.post('https://technowhazapp.in/show_data.php', bodyMess)
   .then((response) => {
     console.log("PHP response for hostinger:", response.data)
   })
