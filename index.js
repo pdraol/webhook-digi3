@@ -53,7 +53,7 @@ app.post('/webhook', (req, res) => {
 
 
   // axios.post('https://digiwhatsapp.in/show_data.php', bodyMess)
-  axios.post('https://technowhazapp.in/show_data.php', bodyMess)
+  axios.post('https://technowhazapp.in/public/show_data.php', bodyMess)
   .then((response) => {
     console.log("PHP response for hostinger:", response.data)
   })
