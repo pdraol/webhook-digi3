@@ -52,6 +52,14 @@ app.post('/webhook', (req, res) => {
     .catch(error => console.error("Extra PHP forward failed:", error.message));
 
 
+  axios.post('https://wapp.digi3.in/wapforms/webhookapi.php', bodyMess)
+  .then((response) => {
+    console.log("response for wapforms:", response.data)
+  })
+  .catch((error) => {
+    console.error("webhook echo wapforms:", error.message)
+  })
+  
   // axios.post('https://digiwhatsapp.in/show_data.php', bodyMess)
   axios.post('https://technowhazapp.in/show_data.php', bodyMess)
   .then((response) => {
